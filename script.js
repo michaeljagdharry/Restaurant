@@ -1,75 +1,117 @@
+const foodData = {
+    "appetizer1": {price: 5},
+    "appetizer2": {price: 3},
+    "appetizer3": {price: 4},
+    "burger1": {price: 10},
+    "burger2": {price: 12},
+    "burger3": {price: 14},
+    "salad1": {price: 6},
+    "salad2": {price: 5},
+    "salad3": {price: 7}
+}
+
+///////////////////////////////////////////////////////
+//Click Left and Right of Image Functionality
+///////////////////////////////////////////////////////
+
+document.addEventListener('click', function(event) {
+    food = event.target;
+    // console.log(`mouseX:${event.pageX}\nmouseY:${event.pageY}`)
+    // console.log(`Window Width:${window.innerWidth}\nWindow Height:${window.innerHeight}`)
+
+    x = event.pageX; y = event.pageY;
+    X1 = food.getBoundingClientRect().left;
+    X2 = food.getBoundingClientRect().right;
+
+    if (X1 < x && x < (X2+X1)/2) //Left Function
+        console.log(food.src + ': left')
+    else //Right Function
+        console.log(food.src + ': right')
+
+    const regex = /food\/([^\/]+)\.jpg$/;
+
+    if(food.src != undefined) {
+    const match = food.src.match(regex)[1];
+    console.log(foodData[match]['price'])
+    }
+
+})
+
+///////////////////////////////////////////////////////
+//Connecting Food Images to their Prices
+///////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ///////////////////////////////////////////////////////
 //Cart Functionality
 ///////////////////////////////////////////////////////
 
-shoppingCart = []
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+shoppingCart = []
 var menuItems = document.querySelectorAll(".container > img");
 for (var i = 0; i < menuItems.length; i++) {
     var item = menuItems[i];
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-///////////////////////////////////////////////////////
-//Event Handlers
-///////////////////////////////////////////////////////
-
-function leftRight(event, leftFunc, rightFunc) {
-    // Get the width of the image
-    var imageWidth = this.offsetWidth;
-    // Get the position of the click relative to the left edge of the image
-    var clickPosition = event.pageX - this.getBoundingClientRect().left;
-    // Calculate the click position as a percentage of the image width
-    var clickPercentage = (clickPosition / imageWidth) * 100;
-    // Decide which function to call based on the click position
-    if (clickPercentage < 50) {
-        leftFunc();
-    } else {
-        rightFunc();
-    }
-};
-
 ///////////////////////////////////////////////////////
 //Food Data
 ///////////////////////////////////////////////////////
-
-foodData = [
-    {name: "appetizer1", price: 5},
-    {name: "appetizer2", price: 3},
-    {name: "appetizer3", price: 4},
-    {name: "burger1", price: 10},
-    {name: "burger2", price: 12},
-    {name: "burger3", price: 14},
-    {name: "salad1", price: 6},
-    {name: "salad2", price: 5},
-    {name: "salad3", price: 7}
-]
 
 
 //Way to add eventlistener to each image
@@ -78,7 +120,7 @@ menuItems.forEach(x => x.addEventListener("mouse", function logID() {
     }
 ))
 
-menuItems.forEach(x => x.removeEventListener("click", logID))
+// menuItems.forEach(x => x.removeEventListener("click", logID))
 
 foodNameRegex = /\w+(?=\.jpg)/
 
