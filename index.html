@@ -13,7 +13,7 @@
     <main id="menu">
         <h2>Appetizers</h2>
         <div class="container" id="appetizers">
-            <img src="food/appetizer1.jpg" id="fries">
+            <img src="food/appetizer1.jpg" id="fries" onclick="addToCart('appetizer1')">
             <img src="food/appetizer2.jpg">
             <img src="food/appetizer3.jpg">
         </div>
@@ -30,6 +30,8 @@
             <img src="food/salad3.jpg">
         </div>
     </main>
+    <div id="cart-items"></div>
+    <p>Total: $<span id="cart-total">0.00</span></p>
     <script src="script.js"></script>
 </body>
 </html>

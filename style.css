@@ -51,3 +51,60 @@ body {
 #cart {
     padding-right: 20px;
 }
+
+button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+#cart-items {
+    margin-top: 20px;
+}
+
+/* Cart item styles */
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.cart-item:hover {
+    background-color: #f1f1f1;
+}
+
+.cart-item span {
+    margin-right: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+.cart-item button {
+    margin-left: 10px;
+    padding: 5px 10px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cart-item button:hover {
+    background-color: #c82333;
+}
