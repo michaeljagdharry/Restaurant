@@ -1,10 +1,8 @@
 /* TD: 
-2. Add to Cart Button HTML - check
 1. Add To Cart Button Functionality
-3. Evenly Space Prices and Items in Your Cart 
-4. Center or Right Justify Add To Cart Buttons 
+3. Spread Cart to page width
+4. Center AddToCart Buttons 
 5. Click Cart Icon to Toggle Cart Display 
-
 */
 const IDfromFileNameRegex = /food\/([^\/]+)\.jpg$/;
 
@@ -21,27 +19,6 @@ const foodData = [ //Quantity=1 so this holds when adding to cart initially
 ];
 
 cart = [];
-
-/* Old Cart Without HTML Table 
-function renderCart() {
-        const cartItemsDiv = document.getElementById('cart-items');
-        cartItemsDiv.innerHTML = '';
-        cart.forEach(item => {
-                const itemDiv = document.createElement('div');
-                itemDiv.className = 'cart-item';
-                itemDiv.innerHTML = `
-            <span>${item.name}</span>
-            <span>$${item.price.toFixed(2)}</span>
-            <span>Quantity: <input type="number" width="10px" value="${item.quantity}" min="0" max="1000" onchange="updateQuantity('${item.id}', parseInt(this.value))"></span>
-            <button onclick="removeFromCart(${item.id})">Remove</button>
-        `
-        cartItemsDiv.appendChild(itemDiv);
-    });
-    document.getElementById('cart-total').innerText = calculateTotal();
-}
-*/
-
-
  
 function renderCart() { //For Table 
 cartTable = document.getElementById('cartTable')
@@ -128,7 +105,7 @@ addToCart('appetizer3');
 //////////////////////////////////////////////////////
 /*Add To Cart Button functionality 
 1. Programmatically create buttons
-2. Get ID from previousSibling src
+2. Get ID from menuItem first child
 3. When clicked, addToCart(ID)
 */
 
@@ -145,110 +122,5 @@ itemDivs.forEach(menuItem => { //For each menu item div
     console.log(itemID)
 })
 
-//collect buttons, change onclick
-
 /////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
-
-///////////////////////////////////////////////////////
-//Connecting Food Images to Add To Carts Buttons
-///////////////////////////////////////////////////////
-
-//Code to insert an element after another - (intend to insert button)
-// fries = document.getElementById('fries');
-// fries.parentNode.insertAdjacentElement('afterbegin',fries.cloneNode(true))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-///////////////////////////////////////////////////////
-//Cart Functionality
-///////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-///////////////////////////////////////////////////////
-//Food Data
-///////////////////////////////////////////////////////
-
-
-//Way to add eventlistener to each image
-// menuItems.forEach(x => x.addEventListener("mouse", function logID() {
-//     console.log(x.getAttribute('id'))
-//     }
-// ))
-
-// menuItems.forEach(x => x.removeEventListener("click", logID))
-
-foodNameRegex = /\w+(?=\.jpg)/
-
-// for(let i = 0; i < menuItems.length; i++) {
-//     foodName = menuItems[i].src.match(foodNameRegex);
-//     menuItems[i].addEventListener('hover', updateCart)
-// }
-
-//Work on one item to generalize to multiple items 
 
