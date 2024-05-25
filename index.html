@@ -13,25 +13,37 @@
     <main id="menu">
         <h2>Appetizers</h2>
         <div class="container" id="appetizers">
-            <img src="food/appetizer1.jpg" id="fries" onclick="addToCart('appetizer1')">
-            <img src="food/appetizer2.jpg">
-            <img src="food/appetizer3.jpg">
+            <div><img src="food/appetizer1.jpg"></div> <!--id="fries" onclick="addToCart('appetizer1')"-->
+            <div><img src="food/appetizer2.jpg"></div>
+            <div><img src="food/appetizer3.jpg"></div>
         </div>
+        <br><br><br>
         <h2>Burgers</h2>
         <div class="container" id="burgers">
-            <img src="food/burger1.jpg">
-            <img src="food/burger2.jpg">
-            <img src="food/burger3.jpg">
+            <div><img src="food/burger1.jpg"></div>
+            <div><img src="food/burger2.jpg"></div>
+            <div><img src="food/burger3.jpg"></div>
         </div>
+        <br><br><br>
         <h2>Salads</h2>
         <div class="container" id="salads">
-            <img src="food/salad1.jpg">
-            <img src="food/salad2.jpg">
-            <img src="food/salad3.jpg">
+            <div><img src="food/salad1.jpg"></div>
+            <div><img src="food/salad2.jpg"></div>
+            <div><img src="food/salad3.jpg"></div>
         </div>
+        <br><br><br><br><br>
     </main>
+    <h2>Your Cart</h2>
     <div id="cart-items"></div>
     <p>Total: $<span id="cart-total">0.00</span></p>
+
+    <table id="cartTable"> 
+        <tr>
+            <th>Item</th>
+            <th>Price</th>
+            <th>Quantity</th>
+        </tr>
+    </table>
     <script src="script.js"></script>
 </body>
 </html>

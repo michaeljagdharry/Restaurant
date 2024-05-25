@@ -1,3 +1,13 @@
+/* TD: 
+2. Add to Cart Button HTML - check
+1. Add To Cart Button Functionality
+3. Evenly Space Prices and Items in Your Cart 
+4. Center or Right Justify Add To Cart Buttons 
+5. Click Cart Icon to Toggle Cart Display 
+
+*/
+const IDfromFileNameRegex = /food\/([^\/]+)\.jpg$/;
+
 const foodData = [ //Quantity=1 so this holds when adding to cart initially
     {id: "appetizer1", name: "Fries", price: 5, quantity: 1},
     {id: "appetizer2", name: "Mac & Cheese", price: 3, quantity: 1},
@@ -12,7 +22,7 @@ const foodData = [ //Quantity=1 so this holds when adding to cart initially
 
 cart = [];
 
-
+/* Old Cart Without HTML Table 
 function renderCart() {
         const cartItemsDiv = document.getElementById('cart-items');
         cartItemsDiv.innerHTML = '';
@@ -29,9 +39,48 @@ function renderCart() {
     });
     document.getElementById('cart-total').innerText = calculateTotal();
 }
+*/
 
-// function renderCart() {}
 
+ 
+function renderCart() { //For Table 
+cartTable = document.getElementById('cartTable')
+// console.log(headerRow)
+cartTable.innerHTML = ''; //Empty Table before re-rendering;
+
+headerRow = cartTable.insertRow(0)
+
+headerCell = headerRow.insertCell(-1)
+headerCell.innerHTML = `<b>Item</b>`
+
+headerCell = headerRow.insertCell(-1)
+headerCell.innerHTML = `<b>Price</b>`
+
+headerCell = headerRow.insertCell(-1)
+headerCell.innerHTML = `<b>Quantity</b>`
+
+cart.forEach(item => {
+    const itemRow = cartTable.insertRow(-1);
+    itemRow.className = 'cartTable-row'; //TD: Make styling. Can make individual styles for each cell
+
+    newCell = itemRow.insertCell(-1); //Name
+    //newCell.className = 'cartTable-name-cell';
+    newCell.innerText = item.name;
+
+    newCell = itemRow.insertCell(-1); //Price
+    newCell.innerText = item.price.toFixed(2);
+    
+    newCell = itemRow.insertCell(-1); //Quantity
+    newCell.innerHTML = `<input type="number" width="10px" value="${item.quantity}" min="0" max="1000" onchange="updateQuantity('${item.id}', parseInt(this.value))"></input>`
+    
+    newCell = itemRow.insertCell(-1); //Remove Button
+    newCell.innerHTML = `<button class ="cartTable-remove-button" onclick="removeFromCart('${item.id}')">Remove</button>`
+});
+
+cartTotal = document.getElementById('cart-total');
+cartTotal.innerText = calculateTotal();
+
+}
 
 function addToCart(id) {
     const itemIndex = cart.findIndex(item => item.id === id); // Find cart object with id
@@ -65,15 +114,40 @@ function calculateTotal() { //Return numeric total
 
 renderCart();
 
+//Adding Stuff to Test
 addToCart('appetizer1'); 
 addToCart('appetizer2'); 
 addToCart('appetizer3'); 
-addToCart('burger1'); 
-addToCart('burger2'); 
-addToCart('burger3'); 
-addToCart('salad1'); 
-addToCart('salad2'); 
-addToCart('salad3'); 
+// addToCart('burger1'); 
+// addToCart('burger2'); 
+// addToCart('burger3'); 
+// addToCart('salad1'); 
+// addToCart('salad2'); 
+// addToCart('salad3'); 
+
+//////////////////////////////////////////////////////
+/*Add To Cart Button functionality 
+1. Programmatically create buttons
+2. Get ID from previousSibling src
+3. When clicked, addToCart(ID)
+*/
+
+itemDivs = document.querySelectorAll('.container > div')
+itemDivs.forEach(menuItem => { //For each menu item div
+    btn = document.createElement('button'); //Make a button
+    btn.className = "addToCartButton";
+    btn.innerText = "Add To Cart"
+    itemID = menuItem.children[0].src.match(IDfromFileNameRegex)[1]
+    btn.addEventListener('click', function () {
+        addToCart(itemID)
+   });
+    menuItem.appendChild(btn) //Add as last child
+    console.log(itemID)
+})
+
+//collect buttons, change onclick
+
+/////////////////////////////////////////////////////
 
 
 
@@ -86,36 +160,12 @@ addToCart('salad3');
 
 
 ///////////////////////////////////////////////////////
-//Click Left and Right of Image Functionality
+//Connecting Food Images to Add To Carts Buttons
 ///////////////////////////////////////////////////////
 
-// document.addEventListener('click', function(event) {
-//     food = event.target;
-//     // console.log(`mouseX:${event.pageX}\nmouseY:${event.pageY}`)
-//     // console.log(`Window Width:${window.innerWidth}\nWindow Height:${window.innerHeight}`)
-
-//     x = event.pageX; y = event.pageY;
-//     X1 = food.getBoundingClientRect().left;
-//     X2 = food.getBoundingClientRect().right;
-
-//     if (X1 < x && x < (X2+X1)/2) //Left Function
-//         console.log(food.src + ': left')
-//     else //Right Function
-//         console.log(food.src + ': right')
-
-//     const regex = /food\/([^\/]+)\.jpg$/;
-
-//     if(food.src != undefined) {
-//     const match = food.src.match(regex)[1];
-//     console.log(foodData[match]['price'])
-//     }
-
-// })
-
-///////////////////////////////////////////////////////
-//Connecting Food Images to their Prices
-///////////////////////////////////////////////////////
-
+//Code to insert an element after another - (intend to insert button)
+// fries = document.getElementById('fries');
+// fries.parentNode.insertAdjacentElement('afterbegin',fries.cloneNode(true))
 
 
 
