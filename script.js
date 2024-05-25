@@ -24,17 +24,13 @@ function renderCart() { //For Table
 cartTable = document.getElementById('cartTable')
 // console.log(headerRow)
 cartTable.innerHTML = ''; //Empty Table before re-rendering;
-
-headerRow = cartTable.insertRow(0)
-
-headerCell = headerRow.insertCell(-1)
-headerCell.innerHTML = `<b>Item</b>`
-
-headerCell = headerRow.insertCell(-1)
-headerCell.innerHTML = `<b>Price</b>`
-
-headerCell = headerRow.insertCell(-1)
-headerCell.innerHTML = `<b>Quantity</b>`
+cartTable.innerHTML += `
+    <tr>
+        <th>Item</th>
+        <th>Price</th>
+        <th>Quantity</th>
+    </tr>
+    `;
 
 cart.forEach(item => {
     const itemRow = cartTable.insertRow(-1);
@@ -56,7 +52,6 @@ cart.forEach(item => {
 
 cartTotal = document.getElementById('cart-total');
 cartTotal.innerText = calculateTotal();
-
 }
 
 function addToCart(id) {
@@ -93,12 +88,12 @@ renderCart();
 
 //Adding Stuff to Test
 addToCart('appetizer1'); 
-addToCart('appetizer2'); 
-addToCart('appetizer3'); 
-// addToCart('burger1'); 
+// addToCart('appetizer2'); 
+// addToCart('appetizer3'); 
+addToCart('burger1'); 
 // addToCart('burger2'); 
 // addToCart('burger3'); 
-// addToCart('salad1'); 
+addToCart('salad1'); 
 // addToCart('salad2'); 
 // addToCart('salad3'); 
 
