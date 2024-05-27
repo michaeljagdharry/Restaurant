@@ -1,5 +1,4 @@
 /* TD: 
-1. Add To Cart Button Functionality
 3. Spread Cart to page width
 4. Center AddToCart Buttons 
 5. Click Cart Icon to Toggle Cart Display 
@@ -24,7 +23,9 @@ function renderCart() { //For Table
 cartTable = document.getElementById('cartTable')
 // console.log(headerRow)
 cartTable.innerHTML = ''; //Empty Table before re-rendering;
-cartTable.innerHTML += `
+//Set initial header
+cartTable.innerHTML += 
+    ` 
     <tr>
         <th>Item</th>
         <th>Price</th>
@@ -32,26 +33,28 @@ cartTable.innerHTML += `
     </tr>
     `;
 
-cart.forEach(item => {
+cart.forEach(item => { //Create Row for each item in cart 
     const itemRow = cartTable.insertRow(-1);
     itemRow.className = 'cartTable-row'; //TD: Make styling. Can make individual styles for each cell
 
     newCell = itemRow.insertCell(-1); //Name
-    //newCell.className = 'cartTable-name-cell';
     newCell.innerText = item.name;
 
     newCell = itemRow.insertCell(-1); //Price
-    newCell.innerText = item.price.toFixed(2);
+    newCell.innerText = '$'+item.price.toFixed(2);
     
     newCell = itemRow.insertCell(-1); //Quantity
     newCell.innerHTML = `<input type="number" width="10px" value="${item.quantity}" min="0" max="1000" onchange="updateQuantity('${item.id}', parseInt(this.value))"></input>`
-    
+
     newCell = itemRow.insertCell(-1); //Remove Button
     newCell.innerHTML = `<button class ="cartTable-remove-button" onclick="removeFromCart('${item.id}')">Remove</button>`
 });
 
-cartTotal = document.getElementById('cart-total');
-cartTotal.innerText = calculateTotal();
+totalCell = cartTable.insertRow(-1).insertCell(0);
+totalCell.innerText = 'Total: $' + calculateTotal()
+totalCell.className = 'cartTotalCell'
+totalCell.setAttribute('colspan',4)
+
 }
 
 function addToCart(id) {
@@ -74,7 +77,7 @@ function updateQuantity(id, quantity) {
     if (itemIndex != -1 && quantity > 0) { //If item exists with positive quantity
         cart[itemIndex].quantity = quantity; //Update quantity
     } else if (itemIndex != -1 && quantity == 0) { //Otherwise if item exists with zero quantity
-        removeFromCart(id); //delete item with id from cart
+        removeFromCart(id); //delete item from cart
     }
     renderCart();
 }
@@ -98,24 +101,29 @@ addToCart('salad1');
 // addToCart('salad3'); 
 
 //////////////////////////////////////////////////////
-/*Add To Cart Button functionality 
-1. Programmatically create buttons
-2. Get ID from menuItem first child
-3. When clicked, addToCart(ID)
-*/
-
-itemDivs = document.querySelectorAll('.container > div')
-itemDivs.forEach(menuItem => { //For each menu item div
-    btn = document.createElement('button'); //Make a button
+const itemDivs = document.querySelectorAll('.container > div')
+itemDivs.forEach(menuItem => { 
+    const btn = document.createElement('button'); 
     btn.className = "addToCartButton";
     btn.innerText = "Add To Cart"
-    itemID = menuItem.children[0].src.match(IDfromFileNameRegex)[1]
+    const itemID = menuItem.children[0].src.match(IDfromFileNameRegex)[1] 
+        //menuItem.children[0] is the food image that btn comes after
+        //.src.match(...) grabs the food ID. The image filenames must correspond with the foodData id's. 
     btn.addEventListener('click', function () {
         addToCart(itemID)
    });
     menuItem.appendChild(btn) //Add as last child
-    console.log(itemID)
 })
-
 /////////////////////////////////////////////////////
 
+cartIcon = document.getElementById('cartIcon')
+cartIcon.addEventListener('click', () => {
+    const tab = document.getElementById('tab');
+
+    if (tab.style.display != 'none') {
+        tab.style.display = 'none';
+    } else {
+        tab.style.display = 'block'
+    }
+
+})
